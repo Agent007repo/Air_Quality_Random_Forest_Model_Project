@@ -59,20 +59,15 @@ These metrics indicate that the model's predictions are highly accurate and clos
 *(This section is where you'll embed or describe your key visualizations. Ensure your Jupyter Notebook, when placed in this repository, has these plots with clear outputs. Alternatively, save them as images, place them in a `visualizations/` subfolder, and embed them here using Markdown: `![Description](visualizations/plot_name.png)`)*
 
 *   **Correlation Heatmap:**
-    *   **Discussion:** "The correlation heatmap was instrumental in identifying highly correlated features. For instance, strong correlations were observed between [mention example pair like 'C6H6(GT)' and 'PT08.S2(NMHC)']. This guided the feature selection process to remove redundant features, improving model efficiency and interpretability."
-    *   `![Correlation Heatmap](visualizations/correlation_heatmap.png)` (Replace with actual path or describe where to find it in the notebook)
-
+    *   **Discussion:** The correlation heatmap was instrumental in identifying highly correlated features. For instance, strong correlations were observed between  pair like 'C6H6(GT)' and 'PT08.S2(NMHC)'. This guided the feature selection process to remove redundant features, improving model efficiency and interpretability.
 *   **Actual vs. Predicted Plot:**
-    *   **Discussion:** "This plot visually confirms the model's high accuracy. The data points cluster tightly around the diagonal line, indicating that the predicted `CO(GT)` values are very close to the actual values. This provides strong visual support for the R2 score of 0.92."
-    *   `![Actual vs Predicted Plot](visualizations/actual_vs_predicted.png)` (Replace with actual path or describe where to find it in the notebook)
+    *   **Discussion:** This plot visually confirms the model's high accuracy. The data points cluster tightly around the diagonal line, indicating that the predicted `CO(GT)` values are very close to the actual values. This provides strong visual support for the R2 score of 0.92.
 
 *   **Residual Plot:**
-    *   **Discussion:** "The residual plot (residuals vs. predicted values) shows a random scatter of points around the zero line. This lack of a discernible pattern suggests that the model's errors are homoscedastic and not systematically biased, which is a good indication of model fit."
-    *   `![Residual Plot](visualizations/residual_plot.png)` (Replace with actual path or describe where to find it in the notebook)
+    *   **Discussion:** The residual plot (residuals vs. predicted values) shows a random scatter of points around the zero line. This lack of a discernible pattern suggests that the model's errors are homoscedastic and not systematically biased, which is a good indication of model fit.
 
 *   **Temporal Patterns (e.g., CO(GT) vs. Hour):**
-    *   **Discussion:** "Visualizing `CO(GT)` levels against the 'Hour' of the day revealed [describe pattern, e.g., 'clear diurnal patterns, with peaks typically observed during morning and evening rush hours']. This underscored the importance of including 'Hour' as a predictive feature."
-    *   `![Temporal Plot - CO vs Hour](visualizations/co_vs_hour_plot.png)` (Replace with actual path or describe where to find it in the notebook)
+    *   **Discussion:** Visualizing `CO(GT)` levels against the 'Hour' of the day revealed clear diurnal patterns, with peaks typically observed during morning and evening rush hours. This underscored the importance of including 'Hour' as a predictive feature."
 
 ## File Structure
 
@@ -80,8 +75,6 @@ These metrics indicate that the model's predictions are highly accurate and clos
 -   `README.md`: This file, providing an overview of the project.
 -   `requirements.txt`: A list of Python dependencies required to run the project.
 -   `.gitignore`: Specifies intentionally untracked files that Git should ignore.
--   `data/` (Recommended): Create this folder and place your dataset (e.g., `AirQualityUCI.csv`) here. Provide download instructions if not including the file directly.
--   `visualizations/` (Recommended): Create this folder and save your key plots as images here if you want to embed them directly in the README.
 
 ## How to Run / Reproduce
 
@@ -99,7 +92,7 @@ These metrics indicate that the model's predictions are highly accurate and clos
     ```bash
     pip install -r requirements.txt
     ```
-4.  **Obtain the dataset:** Download the Air Quality dataset from the UCI ML Repository ([link](https://archive.ics.uci.edu/ml/datasets/Air+Quality)). You will need to place the `AirQualityUCI.xlsx` (or `.csv` if you convert it) file into a `data/` subdirectory within the project. The notebook expects the data to be in `data/AirQualityUCI.xlsx`.
+4.  **Obtain the dataset:** Download the Air Quality dataset from the UCI ML Repository ([link](https://archive.ics.uci.edu/ml/datasets/Air+Quality)).
     *   Ensure you handle the preprocessing steps as outlined in the notebook (e.g., converting -200 to NaN, parsing dates/times).
 5.  **Run the Jupyter Notebook:**
     ```bash
@@ -118,4 +111,4 @@ Potential areas for future improvement include:
 
 ## License
 
-This project is open-sourced under the MIT License. (Consider adding a `LICENSE` file - a common choice is the MIT License. You can create a file named `LICENSE` and paste the MIT License text into it.)
+This project is open-sourced under the MIT License.
