@@ -1,114 +1,62 @@
-# Air Quality Prediction using Random Forest Regression
+# Air Quality Prediction with Random Forest Regression
 
-## Project Overview
+This project predicts hourly carbon monoxide concentration (`CO(GT)`) from air-quality sensor and meteorological data. It is a supervised machine-learning workflow covering data cleaning, exploratory analysis, feature selection, model training, and regression evaluation.
 
-This project focuses on predicting Carbon Monoxide (CO) concentration levels in the air, specifically the `CO(GT)` target variable, using a Random Forest Regressor model. The dataset comprises hourly averaged responses from an array of 5 metal oxide chemical sensors embedded in an Air Quality Multisensor Device, along with meteorological data. The goal was to perform comprehensive Exploratory Data Analysis (EDA), effective feature selection, and build a robust predictive model, evaluating its performance using standard regression metrics.
+## What This Shows
 
-This project demonstrates a typical machine learning workflow, from data understanding and preparation to model training and evaluation, culminating in a high-performance predictive model.
+- End-to-end tabular ML workflow
+- Sensor-data cleaning and missing-value handling
+- Exploratory analysis and correlation-based feature selection
+- Random Forest regression with reproducible train/test evaluation
+- Model interpretation through error metrics and residual inspection
 
-**Key Achievements:**
-- Developed a Random Forest model with an **R-squared value of 0.92** on the test set.
-- Achieved low prediction errors: **MAE: 0.08, MSE: 0.01, RMSE: 0.12**.
-- Performed thorough EDA and feature selection to handle multicollinearity and identify relevant predictors.
+## Result
+
+The Random Forest model achieved strong test-set performance:
+
+| Metric | Value |
+|---|---:|
+| R2 | 0.92 |
+| MAE | 0.08 |
+| MSE | 0.01 |
+| RMSE | 0.12 |
 
 ## Dataset
 
-The project utilizes the [Air Quality Data Set](https://archive.ics.uci.edu/ml/datasets/Air+Quality) from the UCI Machine Learning Repository. This dataset contains 9358 instances of hourly averaged responses from an array of 5 metal oxide chemical sensors embedded in an Air Quality Multisensor Device. The device was located on the field in a significantly polluted area, at road level, within an Italian city.
+Source: [UCI Air Quality Data Set](https://archive.ics.uci.edu/ml/datasets/Air+Quality)
 
-**Target Variable:** `CO(GT)` - True hourly averaged concentration CO in mg/m^3 (reference analyzer)
+The dataset contains 9,358 hourly observations from an air-quality multisensor device in an Italian city. Missing values are represented as `-200` and are handled during preprocessing.
 
 ## Methodology
 
-The project followed these key steps:
+1. Load and clean the UCI air-quality dataset.
+2. Convert date/time fields and replace invalid readings.
+3. Explore distributions, correlations, outliers, and temporal patterns.
+4. Select predictive sensor and time features while reducing redundant inputs.
+5. Train a `RandomForestRegressor` with a fixed random seed.
+6. Evaluate with MAE, MSE, RMSE, R2, actual-vs-predicted plots, and residual checks.
 
-1.  **Data Loading and Initial Cleaning:** Loaded the dataset, handled missing values (often represented as -200 in this dataset), and performed initial data type conversions.
-2.  **Exploratory Data Analysis (EDA):**
-    *   Analyzed data distributions for key features and the target variable.
-    *   Investigated correlations between different sensor readings and meteorological data using heatmaps.
-    *   Visualized temporal patterns (e.g., CO levels by hour, month) to understand trends.
-    *   Used box plots for outlier detection.
-3.  **Feature Selection:**
-    *   Based on EDA (particularly correlation analysis), features were selected to reduce multicollinearity and retain predictive power.
-    *   The final selected features for modeling were: `PT08.S1(CO)`, `NMHC(GT)`, `C6H6(GT)`, `NOx(GT)`, `PT08.S3(NOx)`, `NO2(GT)`, `PT08.S4(NO2)`, `PT08.S5(O3)`, `Hour`, `Month`.
-4.  **Data Splitting:** The dataset was split into training (6139 samples) and testing (1535 samples) sets.
-5.  **Model Training:**
-    *   A `RandomForestRegressor` from `scikit-learn` was chosen for its robustness and ability to capture non-linear relationships.
-    *   The model was initialized with `n_estimators=100` and `random_state=42` for reproducibility.
-    *   The model was trained on the selected features from the training set.
-6.  **Prediction and Evaluation:**
-    *   Predictions were made on the test set.
-    *   Model performance was evaluated using:
-        *   Mean Absolute Error (MAE)
-        *   Mean Squared Error (MSE)
-        *   Root Mean Squared Error (RMSE)
-        *   R-squared (R2) score
+## Repository Contents
 
-## Results and Key Findings
+| File | Purpose |
+|---|---|
+| `Air_Quality_Random_Forest_Model_Samarth.ipynb` | Main analysis and model notebook |
+| `requirements.txt` | Python dependencies |
+| `.gitignore` | Ignore rules for local artifacts |
 
-The Random Forest Regressor demonstrated strong predictive performance on the test set:
+## How To Run
 
-*   **R-squared (R2): 0.92** (The model explains 92% of the variance in `CO(GT)` levels)
-*   **Mean Absolute Error (MAE): 0.08**
-*   **Mean Squared Error (MSE): 0.01**
-*   **Root Mean Squared Error (RMSE): 0.12**
+```bash
+git clone https://github.com/Agent007repo/Air_Quality_Random_Forest_Model_Project.git
+cd Air_Quality_Random_Forest_Model_Project
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook Air_Quality_Random_Forest_Model_Samarth.ipynb
+```
 
-These metrics indicate that the model's predictions are highly accurate and closely align with the actual air quality measurements.
+Download the UCI dataset and follow the notebook preprocessing steps before running the model cells.
 
-### Visualizing Insights
+## Recruiter Signal
 
-*(This section is where you'll embed or describe your key visualizations. Ensure your Jupyter Notebook, when placed in this repository, has these plots with clear outputs. Alternatively, save them as images, place them in a `visualizations/` subfolder, and embed them here using Markdown: `![Description](visualizations/plot_name.png)`)*
-
-*   **Correlation Heatmap:**
-    *   **Discussion:** The correlation heatmap was instrumental in identifying highly correlated features. For instance, strong correlations were observed between  pair like 'C6H6(GT)' and 'PT08.S2(NMHC)'. This guided the feature selection process to remove redundant features, improving model efficiency and interpretability.
-*   **Actual vs. Predicted Plot:**
-    *   **Discussion:** This plot visually confirms the model's high accuracy. The data points cluster tightly around the diagonal line, indicating that the predicted `CO(GT)` values are very close to the actual values. This provides strong visual support for the R2 score of 0.92.
-
-*   **Residual Plot:**
-    *   **Discussion:** The residual plot (residuals vs. predicted values) shows a random scatter of points around the zero line. This lack of a discernible pattern suggests that the model's errors are homoscedastic and not systematically biased, which is a good indication of model fit.
-
-*   **Temporal Patterns (e.g., CO(GT) vs. Hour):**
-    *   **Discussion:** Visualizing `CO(GT)` levels against the 'Hour' of the day revealed clear diurnal patterns, with peaks typically observed during morning and evening rush hours. This underscored the importance of including 'Hour' as a predictive feature."
-
-## File Structure
-
--   `Air_Quality_Random_Forest_Model_Samarth.ipynb`: The main Jupyter Notebook containing all the code for data analysis, model training, and evaluation.
--   `README.md`: This file, providing an overview of the project.
--   `requirements.txt`: A list of Python dependencies required to run the project.
--   `.gitignore`: Specifies intentionally untracked files that Git should ignore.
-
-## How to Run / Reproduce
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/your-repository-name.git
-    cd your-repository-name
-    ```
-2.  **Create a virtual environment (recommended):**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  **Obtain the dataset:** Download the Air Quality dataset from the UCI ML Repository ([link](https://archive.ics.uci.edu/ml/datasets/Air+Quality)).
-    *   Ensure you handle the preprocessing steps as outlined in the notebook (e.g., converting -200 to NaN, parsing dates/times).
-5.  **Run the Jupyter Notebook:**
-    ```bash
-    jupyter notebook Air_Quality_Random_Forest_Model_Samarth.ipynb
-    ```
-    Execute the cells sequentially to see the analysis and model results.
-
-## Future Work
-
-Potential areas for future improvement include:
-
-*   **Hyperparameter Tuning:** Employ techniques like GridSearchCV or RandomizedSearchCV to find the optimal hyperparameters for the Random Forest model.
-*   **Advanced Feature Engineering:** Explore creating more complex features, such as interaction terms or lag features if appropriate for time series aspects.
-*   **Comparison with Other Models:** Evaluate other regression algorithms (e.g., Gradient Boosting, SVMs, Neural Networks) to compare performance.
-*   **Deployment:** Package the model into an API for real-time predictions (e.g., using Flask/FastAPI).
-
-## License
-
-This project is open-sourced under the MIT License.
+This is a practical analyst/ML workflow project. It demonstrates data cleaning, supervised modeling, metric interpretation, and clear communication of predictive performance.
